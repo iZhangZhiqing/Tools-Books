@@ -1,0 +1,51 @@
+{
+	"level": "INFO",
+	"agent": {
+		"name": "timesoft",
+		"ephemeral_id": "79ef63cf-d6cb-479a-bb62-eaa3952dd7f0",
+		"id": "95d01fdc-7e5d-4463-a3d8-a710cdc2f509",
+		"type": "filebeat",
+		"hostname": "timesoft",
+		"version": "7.8.1"
+	},
+	"@timestamp": "2020-09-08T01:26:52.709Z",
+	"log": {
+		"file": {
+			"path": "/home/ubuntu/htta-tms/logs/htta-tms.log"
+		},
+		"offset": 287655
+	},
+	"timestamp": "2020-09-08 09:26:43.491",
+	"logMessage": "========================================== Start ==========================================",
+	"@version": "1",
+	"fields": {
+		"appname": "htta-tms",
+		"node": "test"
+	},
+	"host": {
+		"name": "timesoft",
+		"ip": ["192.168.254.132", "fe80::20c:29ff:fe5d:7b14"],
+		"mac": ["00:0c:29:5d:7b:14"],
+		"architecture": "x86_64",
+		"id": "a92cffdd3c3b43bd999a810148cd7f25",
+		"containerized": false,
+		"hostname": "timesoft",
+		"os": {
+			"platform": "ubuntu",
+			"codename": "focal",
+			"name": "Ubuntu",
+			"kernel": "5.4.0-42-generic",
+			"version": "20.04.1 LTS (Focal Fossa)",
+			"family": "debian"
+		}
+	},
+	"ecs": {
+		"version": "1.5.0"
+	},
+	"className": "com.timesoft.config.web.WebLogAspect",
+	"input": {
+		"type": "log"
+	},
+	"tags": ["beats_input_codec_plain_applied"],
+	"message": "[2020-09-08 09:26:43.491] [INFO ] com.timesoft.config.web.WebLogAspect - ========================================== Start =========================================="
+}

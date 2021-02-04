@@ -1,0 +1,86 @@
+node.name：节点的描述性名称。默认值为机器的主机名
+
+path.data：Logstash及其插件用于满足任何持久需求的目录，默认值LOGSTASH_HOME/data。
+
+pipeline.id： 管道的ID，默认值为main，可以更改；
+
+pipeline.workers:
+并行执行管道过滤器和输出阶段的工作器数量。如果发现事件正在备份，或者CPU未饱和，请考虑增加此数量以更好地利用机器处理能力，默认值为主机的CPU核心数
+
+pipeline.batch.size：
+在尝试执行其过滤器和输出之前，单个工作线程将从输入收集的最大事件数。较大的批量通常更有效，但代价是增加了内存开销，需要在jvm.options配置文件中增加JVM堆空间，默认值为125。
+
+pipeline.batch.delay：
+创建管道事件批处理时，在将小型批处理分派给管道工作者之前等待每个事件的时间以毫秒为单位，默认值为50
+
+pipeline.unsafe_shutdown：
+设置true为时，强制Logstash在关闭期间退出，即使内存中仍有事件。默认情况下，Logstash将拒绝退出，直到所有已接收的事件都被推送到输出。启用此选项可能会导致关闭期间数据丢失，默认值为false
+
+path.config：
+主管道的Logstash配置的路径。如果指定目录或通配符，则会按字母顺序从目录中读取配置文件。
+
+config.test_and_exit：
+设置为时true，检查配置是否有效，然后退出。使用此设置不会检查grok模式的正确性。Logstash可以从目录中读取多个配置文件，默认值为false
+
+config.reload.automatic：
+设置true为时，定期检查配置是否已更改，并在配置发生更改时重新加载配置。这也可以通过SIGHUP信号手动触发，默认值为false
+
+config.reload.interval：几秒钟内，Logstash会检查配置文件中的更改，默认值为3s
+
+config.debug：
+设置为时true，将完全编译的配置显示为调试日志消息。你还必须设置log.level:
+debug。警告：日志消息将包含作为纯文本传递给插件配置的任何密码选项，并可能导致明文密码出现在您的日志中，默认值为false
+
+config.support_escapes
+设置true为时，带引号的字符串将处理以下转义序列：\n成为文字换行符（ASCII 10）。\r成为文字回车（ASCII13）。\t成为文字标签（ASCII 9）。\\成为一个字面反斜杠\。\"成为字面双引号。\'成为字面引号，默认值为false
+
+modules
+配置时，modules必须在此表中描述的嵌套YAML结构中。
+
+queue.type：
+用于事件缓冲的内部排队模型。指定memory基于内存的传统队列，或persisted基于磁盘的ACKed队列（持久队列），默认值为memory，推荐使用持久队列
+
+path.queue：
+启用持久队列时将存储数据文件的目录路径（queue.type: persisted）。
+
+queue.page_capacity：
+启用持久队列时使用的页面数据文件的大小（queue.type: persisted）。队列数据由分成页面的仅附加数据文件组成，默认值为64MB
+
+queue.max_events：
+启用持久队列时队列中未读事件的最大数量（queue.type: persisted），默认值为0（无限制）
+
+queue.max_bytes：
+队列的总容量，以字节数表示。确保磁盘驱动器的容量大于此处指定的值。如果同时指定了两者queue.max_events，queue.max_bytes则Logstash将使用先达到的标准，默认值为1024mb
+
+queue.checkpoint.acks：
+启用持久队列时强制检查点之前的最大ACK事件数（queue.type: persisted）。指定queue.checkpoint.acks: 0将此值设置为无限制，默认值为1024
+
+queue.checkpoint.writes：
+启用持久队列时强制检查点之前写入事件的最大数量（queue.type: persisted）。指定queue.checkpoint.writes:
+
+0将此值设置为无限制，默认值为1024
+
+queue.checkpoint.retry：
+启用后，对于任何失败的检查点写入，Logstash将针对每次尝试检查点写入重试一次。不会重试任何后续错误。这是仅在具有非标准行为（如SAN）的文件系统上看到的失败检查点写入的解决方法，除特殊情况外，不建议这样做，默认值为false
+
+dead_letter_queue.enable：
+用于指示Logstash启用插件支持的DLQ功能的标志，默认值为false
+
+dead_letter_queue.max_bytes：
+每个死信队列的最大大小。如果条目超过此设置会增加死信队列的大小，则会删除条目。默认值为1024mb
+
+path.dead_letter_queue：
+将为死信队列存储数据文件的目录路径。
+
+http.host：绑定地址，默认值为"127.0.0.1"
+
+http.port：绑定端口，默认值为9600
+
+log.level：日志级别。有效选项包括：fatal，error，warn，info，debug，trace，info
+
+log.format：日志格式。设置为json或plain，默认值为plain
+
+path.logs：Logstash将其日志写入的目录，默认值为LOGSTASH_HOME/logs
+
+path.plugins：
+哪里可以找到自定义插件。您可以多次指定此设置以包含多个路径。插件预计将在一个特定的目录层次结构： PATH/logstash/TYPE/NAME.rb其中TYPE是inputs，filters，outputs，或codecs，并且NAME是插件的名称。
