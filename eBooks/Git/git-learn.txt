@@ -1,0 +1,15 @@
+时光穿梭机
+	版本回退
+		git reset --hard commit_id
+		Eg.	git reset --hard HEAD^
+			git reset --hard 1094a
+
+	撤销修改
+		还未放到暂存区
+			git checkout -- file		# 丢弃工作区的修改
+ 		git add 之后
+			git reset HEAD file			# 把暂存区的修改回退到工作区
+			git checkout -- file		# 丢弃工作区的修改
+		git commit 之后，见[时光穿梭机-版本回退]
+		
+分支管理策略
